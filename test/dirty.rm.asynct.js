@@ -39,8 +39,6 @@ exports['two in memory db cannot see each other'] = function (test){
   dirty1.set(k,v)
   test.equal(dirty1.get(k),v)
   test.notEqual(dirty2.get(k),v)
-//  dirty2.rm(k)
-//  test.equal(dirty.get(k),undefined)
   test.finish()
 }
 
@@ -64,7 +62,6 @@ function checkCallbacks(test,db,finish){
         finish()
   }}}
 }
-
 
 exports['in file database does callbacks'] = function (test){
   var fileD = require('dirty')('test.drity')
