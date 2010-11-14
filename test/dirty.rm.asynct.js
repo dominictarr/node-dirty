@@ -56,13 +56,10 @@ function checkCallbacks(test,db,finish){
     db.set(k,v,c)
 
     function c(){
-      console.log('set' + db.path)
       test.equal(db.get(k),v)
-      console.log('get' + db.path)
       db.rm(k,c)
 
       function c (){
-        console.log('get' + db.path)
         clearTimeout(timer)
         finish()
   }}}
