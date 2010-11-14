@@ -65,7 +65,11 @@ function checkCallbacks(test,db,finish){
 
 exports['in file database does callbacks'] = function (test){
   var fileD = require('dirty')('test.drity')
-    checkCallbacks(test,fileD,test.finish)
+    checkCallbacks(test,fileD,c)
+    function c() {
+      fs.unlink(fileD.path)
+      test.finish()
+    }
 }
 
 exports['in memory database does callbacks'] = function (test){
