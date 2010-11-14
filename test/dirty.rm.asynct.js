@@ -1,5 +1,10 @@
 
 
+function cleanup(dirty){
+    require('fs').unlinkSync(process.ENV.PWD + '/' + dirty.path)
+
+}
+
 exports['rm and key is not available'] = function (test){
   var dirty = require('dirty')('test.dirty')
   dirty.on('load', c)
@@ -10,6 +15,7 @@ exports['rm and key is not available'] = function (test){
     test.equal(dirty.get(k),v)
     dirty.rm(k)
     test.equal(dirty.get(k),undefined)
+    cleanup(dirty)
     test.finish()
   }
 }
@@ -67,7 +73,7 @@ exports['in file database does callbacks'] = function (test){
   var fileD = require('dirty')('test.drity')
     checkCallbacks(test,fileD,c)
     function c() {
-      fs.unlink(fileD.path)
+      cleanup(fileD)
       test.finish()
     }
 }
